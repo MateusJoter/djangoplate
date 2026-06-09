@@ -23,4 +23,6 @@ A fim de manter a segurança do projeto, é uma boa prática não enviar certas 
 - No venv, criar o arquivo e configurar as variáveis.
 - Nos arquivos que utilizam as variáveis de ambiente:
   import os
-  From dotenv impor load_dot env
+  from dotenv import load_dotenv
+  load_dotenv()
+  Onde for usar as variáveis: = str(os.getenv('NOME_VARIÁVEL'))
