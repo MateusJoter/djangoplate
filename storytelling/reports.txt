@@ -1,0 +1,26 @@
+DJANGO
+- Princípio: Content-Driven (Orientado a conteúdo)
+  O foco do framewok é a provisão de uma estrutura para uso de banco de dados voltados para a disponibilização de conteúdos, por exemplo notícioas, fóruns...
+- CRUD: facilitado.
+- Principais vantagens em relação a outros frameworks:
+  Sintaxe objetiva;
+  ORM nativo (sem SQL bruto);
+  Interface de administrador;
+  Voltado a segurança;
+  Arquitetura MVT (Model View Template);
+  Comunidade ativa;
+  Estrutura completa;
+  Única fonte de verdade (Fullstack).
+- Instalação: pip install django -> django-admin startproject setup (ou config) . -> python manage.py runserver (para visualizar o projeto ativo)
+
+IDIOMA E TIMEZONE
+- settings.py
+  Nele, alterar: LANGUAGE_CODE = 'pt-br'; TIME_ZONE = 'America/Fortaleza'
+
+VARIÁVEIS DE AMBIENTE
+A fim de manter a segurança do projeto, é uma boa prática não enviar certas variáveis para o repositório. Para isso:
+- .env: pip install python-dotenv
+- No venv, criar o arquivo e configurar as variáveis.
+- Nos arquivos que utilizam as variáveis de ambiente:
+  import os
+  From dotenv impor load_dot env
