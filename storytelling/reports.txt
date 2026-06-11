@@ -26,3 +26,47 @@ A fim de manter a segurança do projeto, é uma boa prática não enviar certas 
   from dotenv import load_dotenv
   load_dotenv()
   Onde for usar as variáveis: = str(os.getenv('NOME_VARIÁVEL'))
+
+CRIANDO APPS
+Diferentemente do startproject, que gera o setup inicial para o desenvolvimento de todo o projeto, o comando "python manage.py startapp <nome do app>" serve para criar as pequenas aplicações que compõem o projeto.
+Em outros termos, enquanto o startproject trata do macro, o startapp lida com o micro.
+- Após criar o app, ir em settings.py a adicioná-lo no INSTALLED_APPS
+
+CRIANDO VIEWS
+Para as respostas gráficas de cada aplicação, é necessário trabalhar sobre os arquivos views.py de cada um. De maneira geral, têm-se em views.py:
+- from django.http import HttpResponse
+- def index(resquest):
+    return HttpResponse(<html da página>)
+Um vez criada a interface, vai-se em urls.py na pasta principal do projeto e executa-se duas atividades principais:
+- importação da função responsável pela resposta gráfica;
+- listagem do respectivo path
+
+ISOLAMENTO DE URLS
+O método acima exige que todos os pths estejam agrupados em uma lista em um arquivo só. Contudo, em termos de gerenciamento, isso é uma estrtégia ruim. Quantos paths não teriam de estar aglutinadas em uma lista? Quão difícil não seria trabalhar com isso? Para evitar esse problema, segue-se:
+- Na pasta do app, cria-se outro urls.py, voltado apenas às rotas do prórpio app. Nele:
+  from django.urls import path
+  from <app>.views import <função de retorno gráfico, ex: index>
+  urlpatterns = [path('', index)]
+- Retornando ao urls.py do projeto:
+  from django.urls import include
+  urlpatterns = [
+    (...), 
+    path('', include('<app>.urls')),
+  ]
+
+TEMPLATES
+A partir de agora, não utilizaremos a mesma abordagem de quando criamos as views, quando usamos HttpResponse e etc. O desafio é organizarmos os templates html e consumi-los, para isso:
+- No diretório base, criar pasta templates com os templates html a serem consumidos;
+- Em settings.py (setup), apontar para os templates via INSTALLED_APPS e, em TEMPLATES, 'DIRS': [os.path.join(BASE_DIR, 'templates')]
+- Em views.py, alterar index para consumir request e retornar render(request, 'index.html')
+
+
+
+
+
+
+
+
+
+
+
