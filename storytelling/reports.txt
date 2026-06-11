@@ -60,6 +60,49 @@ A partir de agora, não utilizaremos a mesma abordagem de quando criamos as view
 - Em settings.py (setup), apontar para os templates via INSTALLED_APPS e, em TEMPLATES, 'DIRS': [os.path.join(BASE_DIR, 'templates')]
 - Em views.py, alterar index para consumir request e retornar render(request, 'index.html')
 
+ARQUIVOS ESTÁTICOS
+Não basta contudo, carregar os templates se os arquivos estáticos, ou seja, aqueles que servem para definir a arte visual da aplicação, não estiverem sendo utilizados. Para isso, segue-se:
+- Configuração
+  Em settings.py, na parte de configurações estáticas, criar
+  1. STATICFILES_DIR = [os.path.join(BASE_DIR, 'setup/static')] - observe, portanto, que deve ser passado uma pasta static em setup; esse diretório apontado é o ponto de consumo de arquivos estáticos da aplicação.
+  2. STATIC_ROOT = os.path.join(BASE_DIR, 'static') - esse, por sua vez, refere-se ao diretório para as manipulações que o django executar.
+  3. python manage.py collectstatic
+- Adaptação
+  No index.html, o template, indicar o consumo de arquivos estáticos para o django via {% load static %} no início
+  Ainda em index.html, é necessário apontar onde os arquivos estáticos serão utilizados. Para isso, onde for necessário, implementar: "{% static '<caminho/do/arquivo/consumido>' }"
+  Bizu: como todos os arquivos precisam ser apontados, selecionar os múltiplos pontos a serem aletrados segurando Alt (VSCode) e implementar.
+
+OUTRAS PÁGINAS
+As aplicações precisam integrar suas páginas. Até então, arquitetou-se o index, faltam os desdobramentos das demais funções.
+Resumidamente, tudo o que aplicou-se para o index, plica-se agora. Contudo, um vez configurada, a página precisa ser apontada pelas demais. Para isso:
+- em urls.py, adicionar parâmetro name=<nome da página>
+- no html redirecionador, pôr nos href estrutura semelhante a "{% url '<nome da página>' %}"
+  Bizu: Crtl+F (pesquisa) -> clica na seta à esquerda e faz o replace para múltiplas incidências.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
